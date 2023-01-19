@@ -2,7 +2,7 @@
 // url for open weather
 // https://api.openweathermap.org/data/2.5/weather?q=LOCATION&APPID=APIKEY
 
-const myLocation = 'Cincinnati';
+const myLocation = 'London';
 
 async function getData (location) {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=9a5cb4cb24bcfea0cbc3a84d7e907708`, { mode: 'cors' });

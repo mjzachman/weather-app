@@ -11,11 +11,30 @@ body {
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
    
 }
 
+form {
+    align-self: flex-start;
+    padding-left: 100px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    padding: 3px;
+}
+button {
+    padding: 3px;
+    background-color: hotpink;
+    border: solid white 3px;
+    color: white;
+}
 #content {
     height: 80%;
     width: 80%;
@@ -34,10 +53,11 @@ body {
 #info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #city {
     font-size: 2.0rem;
     font-weight: bold;
-    
 }

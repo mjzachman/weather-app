@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: hotpink;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+#content {
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+#weather {
+    font-size: 5.0rem;
+    font-weight: bold;
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+}
+
+#city {
+    font-size: 2.0rem;
+    font-weight: bold;
+    
+}

@@ -2,11 +2,12 @@
 // url for open weather
 // https://api.openweathermap.org/data/2.5/weather?q=LOCATION&APPID=APIKEY
 
-const myLocation = 'London';
+
 
 async function getData (location) {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=9a5cb4cb24bcfea0cbc3a84d7e907708`, { mode: 'cors' });
-    return response.json();
+    const data = await response.json();
+    return data;
 }
 
 function KtoC (temp) {
@@ -22,7 +23,7 @@ function calcTime (timezone) {
     return Date(d.getTime() + (d.getTimezoneOffset() * 60000) + (1000 * timezone));
 }
 
-function processData (data) {
+function process (data) {
     const newData = {
         location: data.name,
         time: calcTime(data.timezone).substring(0,21),
@@ -46,16 +47,16 @@ function locationForm () {
     return userLocation;
 }
 
-function displayData (data) {
-    content = document.getElementById('content');
-    city = document.createElement('p');
-    temp = document.createElement('p');
-    time = document.createElement('p');
-    info = document.createElement('div');
+function display(data) {
+    const content = document.getElementById('content');
+    const city = document.createElement('p');
+    const weather = document.createElement('p');
+    const time = document.createElement('p');
+    const info = document.createElement('div');
     
    
-    temp.setAttribute('id','weather');
-    temp.textContent = `${data.tempF} ${data.weather}`;
+    weather.setAttribute('id','weather');
+    weather.textContent = `${data.tempF} ${data.weather}`;
 
     city.setAttribute('id', 'city');
     city.textContent = data.location;
@@ -67,17 +68,44 @@ function displayData (data) {
     info.appendChild(city);
     info.appendChild(time);
     
-    content.appendChild(temp);
+    content.appendChild(weather);
     content.appendChild(info);
-    
+}
 
-    console.log(data);
+function update(data) {
+    const content = document.getElementById('content');
+    const city = document.getElementById('city');
+    const weather = document.getElementById('weather');
+    const time = document.getElementById('time');
+
+    weather.textContent = `${data.tempF} ${data.weather}`;
+    city.textContent = data.location;
+    time.textContent = data.time;
+}
+
+
+function validate(event) {
+    event.preventDefault();
+    const userLocation = document.querySelector('#user-city').value;
+    return userLocation;
 }
 
 async function main () {
-    const rawData = await getData(myLocation);
-    const weatherData = processData(rawData);
-    displayData(weatherData);
+    let myLocation = 'Cincinnati';
+    let rawData = await getData(myLocation);
+    let weatherData = process(rawData);
+    display(weatherData);
+
+
+    const submit = document.querySelector('button');
+    submit.addEventListener('click', async function submit(e) {
+        myLocation = validate(e);
+        rawData = await getData(myLocation);
+        weatherData = process(rawData);
+        update(weatherData);
+    })
+
+   
 }
 
 main();
